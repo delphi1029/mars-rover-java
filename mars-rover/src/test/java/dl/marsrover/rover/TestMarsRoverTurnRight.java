@@ -16,6 +16,8 @@ import dl.marsrover.controller.MarsRoverController;
 import dl.marsrover.direction.Direction;
 import dl.marsrover.direction.EastDirection;
 import dl.marsrover.direction.NorthDirection;
+import dl.marsrover.plateau.Plateau;
+import dl.marsrover.plateau.SquarePlateau;
 import dl.marsrover.position.MarsRoverPosition;
 import dl.marsrover.position.Position;
 
@@ -26,6 +28,7 @@ public class TestMarsRoverTurnRight {
 	private Direction direction;
 	private Coordinates coordinates;
 	private Command command;
+	private Plateau plateau;
 	
 	
 	@Before
@@ -33,7 +36,8 @@ public class TestMarsRoverTurnRight {
 		coordinates = new Coordinates2D(1, 2);
 		direction = new NorthDirection();
 		currentPosition = new MarsRoverPosition(direction, coordinates);
-		rover = new MarsRover(currentPosition);
+		plateau = new SquarePlateau(new Coordinates2D(5, 5), new Coordinates2D(0, 0));
+		rover = new MarsRover(currentPosition,plateau);
 		command = new TurnRightCommand(rover);
 	}
 	
