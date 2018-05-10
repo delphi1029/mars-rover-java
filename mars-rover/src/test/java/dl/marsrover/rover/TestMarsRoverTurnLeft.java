@@ -46,7 +46,7 @@ public class TestMarsRoverTurnLeft {
 		Controller  controller = new MarsRoverController(Arrays.asList(command));
 		controller.executeCommands();
 		
-		Assert.assertEquals(rover.getPosition().getDirection().toString(), new WestDirection().toString());
+		Assert.assertEquals(new WestDirection().toString(),rover.getPosition().getDirection().toString());
 	}
 	
 

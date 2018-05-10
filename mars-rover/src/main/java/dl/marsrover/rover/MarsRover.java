@@ -25,7 +25,7 @@ public class MarsRover implements Rover {
 
 	public void turnLeft() {
 		Direction current = currentPosition.getDirection();
-		current.turnLeft();
+		currentPosition.setDirection(current.turnLeft());
 	}
 
 
@@ -36,28 +36,29 @@ public class MarsRover implements Rover {
 
 
 	public void move() {
-		Move move = null;
-		Direction current = currentPosition.getDirection();
-		Coordinates coordinates = currentPosition.getCoordinates();
-		
-		if((current.toString().equals("North"))) {
-			move = new MoveNorth(coordinates);
-		} else if((current.toString().equals("East"))) {
-			move = new MoveEast(coordinates);
-		} else if((current.toString().equals("West"))) {
-			move = new MoveWest(coordinates);
-		} else if((current.toString().equals("South"))) {
-			move = new MoveSouth(coordinates);
-		}
-		
+		Move move = getMoveDirection();
 		Coordinates newCoordinates = move.move();
 		if(isInRange(newCoordinates)) {
 			currentPosition.setCoordinates(move.move());
 		} else {
 			throw new OutOfRangeException("Nars Rover Is going out of range");
 		}
-		
-		
+	}
+
+	private Move getMoveDirection() {
+		String currentDirection = currentPosition.getDirection().toString();
+		Coordinates coordinates = currentPosition.getCoordinates();
+		Move move = null;
+		if((currentDirection.equals("North"))) {
+			move = new MoveNorth(coordinates);
+		} else if((currentDirection.equals("East"))) {
+			move = new MoveEast(coordinates);
+		} else if((currentDirection.equals("West"))) {
+			move = new MoveWest(coordinates);
+		} else if((currentDirection.equals("South"))) {
+			move = new MoveSouth(coordinates);
+		}
+		return move;
 	}
 
 	private boolean isInRange(Coordinates newCoordinates) {
